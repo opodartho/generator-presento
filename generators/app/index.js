@@ -9,9 +9,10 @@ const slugify = require("slugify");
 module.exports = class extends Generator {
   initializing() {
     this.pkg = this.fs.readJSON(path.join(__dirname, "../package.json"));
-    this.config.defaults = {
-      packageVersion: "0.0.0"
-    };
+    this.config.defaults({
+      packageVersion: "0.0.0",
+      deployToGithubPages: false
+    });
   }
 
   prompting() {
@@ -32,12 +33,34 @@ module.exports = class extends Generator {
       {
         name: "packageVersion",
         message: "What version should we put in the package.json file?",
-        default: "0.0.0",
+        default: this.config.get("packageVersion"),
         validate: function(input) {
           if (!semver.valid(input)) {
             return "Please enter a correct version, i.e. MAJOR.MINOR.PATCH";
           }
           return true;
+        }
+      },
+      {
+        name: 'deployToGithubPages',
+        message: 'Do you want to deploy you presentation to Github Pages? This requires an empty Github repository.',
+        type: 'confirm',
+        default: this.config.get('deployToGithubPages')
+      },
+      {
+        name: 'githubUsername',
+        message: 'What is your Github username?',
+        default: this.config.get('githubUsername'),
+        when: function(props) {
+          if(props.deployToGithubPages) return true;
+        }
+      },
+      {
+        name: 'githubRepository',
+        message: 'What is the Github repository name?',
+        default: this.config.get('githubRepository'),
+        when: function(props) {
+          if(props.deployToGithubPages) return true;
         }
       }
     ];
@@ -45,6 +68,9 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(props => {
       this.config.set("presentationTitle", props.presentationTitle);
       this.config.set("packageVersion", props.packageVersion);
+      this.config.set("deployToGithubPages", props.deployToGithubPages);
+      this.config.set("githubUsername", props.githubUsername);
+      this.config.set("githubRepository", props.githubRepository);
     });
   }
 
