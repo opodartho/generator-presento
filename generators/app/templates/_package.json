@@ -1,0 +1,47 @@
+{
+  "name": "<%= slugify(config.get('presentationTitle'), {lower: true}) %>",
+  "version": "<%= config.get('packageVersion') %>",
+  "description": "Reveljs starter kit",
+  "scripts": {
+    "test": "grunt test",
+    "start": "grunt serve",
+    "build": "grunt build",
+    "deploy": "grunt deploy"
+  },
+  "author": {
+    "name": "Zahidul Haque",
+    "email": "iisowrovii@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:opodartho/presento.git"
+  },
+  "engines": {
+    "node": ">=4.0.0",
+    "npm": ">=1.3.7"
+  },
+  "devDependencies": {
+    "express": "*",
+    "grunt": "*",
+    "grunt-autoprefixer": "*",
+    "grunt-build-control": "*",
+    "grunt-cli": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-connect": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-retire": "*",
+    "grunt-sass": "*",
+    "load-grunt-tasks": "*",
+    "mustache": "*",
+    "node-sass": "^4.11.0",
+    "socket.io": "*"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "reveal.js": "*"
+  }
+}

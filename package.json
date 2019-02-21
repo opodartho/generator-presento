@@ -1,0 +1,78 @@
+{
+  "name": "generator-presento",
+  "version": "0.1.0",
+  "description": "RevealJS Starter Kit",
+  "homepage": "https://github.com/opodartho/generator-presento",
+  "author": {
+    "name": "Zahidul Haque",
+    "email": "iisowrovii@gmail.com",
+    "url": "https://github.com/opodartho"
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators/index.js",
+  "keywords": [
+    "Reveal.js",
+    "Starter Kit",
+    "Yeoman",
+    "yeoman-generator"
+  ],
+  "devDependencies": {
+    "yeoman-test": "^1.7.0",
+    "yeoman-assert": "^3.1.0",
+    "eslint": "^5.9.0",
+    "prettier": "^1.15.2",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-config-xo": "^0.25.0",
+    "jest": "^24.1.0"
+  },
+  "engines": {
+    "npm": ">= 4.0.0"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "semver": "^5.6.0",
+    "slugify": "^1.3.4",
+    "yeoman-generator": "^2.0.1",
+    "yosay": "^2.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "xo",
+      "prettier"
+    ],
+    "env": {
+      "jest": true,
+      "node": true
+    },
+    "rules": {
+      "prettier/prettier": "error"
+    },
+    "plugins": [
+      "prettier"
+    ]
+  },
+  "scripts": {
+    "pretest": "eslint .",
+    "test": "jest"
+  },
+  "repository": "opodartho/generator-presento",
+  "license": "MIT"
+}

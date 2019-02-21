@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Zahidul Haque",
+      "authorEmail": "iisowrovii@gmail.com",
+      "authorUrl": "https://github.com/opodartho"
+    }
+  }
+}
