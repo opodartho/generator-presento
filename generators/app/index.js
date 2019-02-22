@@ -115,6 +115,11 @@ module.exports = class extends Generator {
       this.destinationPath("gruntfile.js"),
       { config: this.config }
     );
+    this.fs.copyTpl(
+      this.templatePath("_intro.md"),
+      this.destinationPath("slides/intro.md"),
+      { config: this.config }
+    );
   }
 
   install() {

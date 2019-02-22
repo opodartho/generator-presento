@@ -7,7 +7,8 @@ describe("generator-presento:app", () => {
   beforeAll(() => {
     return helpers
       .run(path.join(__dirname, "../generators/app"))
-      .withPrompts({ presentationTitle: "foo" });
+      .withPrompts({ presentationTitle: "foo" })
+      .withPrompts({ presentationDescription: "bar" });
   });
 
   it("creates files", () => {
@@ -16,6 +17,7 @@ describe("generator-presento:app", () => {
       "templates/_index.html",
       "templates/_section.html",
       "slides/slides.json",
+      "slides/intro.md",
       "gruntfile.js"
     ]);
   });
