@@ -82,6 +82,7 @@ module.exports = class extends Generator {
 
     return this.prompt(prompts).then(props => {
       this.config.set("presentationTitle", props.presentationTitle);
+      this.config.set("presentationDescription", props.presentationDescription);
       this.config.set("packageVersion", props.packageVersion);
       this.config.set("deployToGithubPages", props.deployToGithubPages);
       this.config.set("githubUsername", props.githubUsername);
