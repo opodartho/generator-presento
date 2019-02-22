@@ -1,7 +1,7 @@
 {
   "name": "<%= slugify(config.get('presentationTitle'), {lower: true}) %>",
   "version": "<%= config.get('packageVersion') %>",
-  "description": "Reveljs starter kit",
+  "description": "<%= config.get('presentationDescription')%>",
   "scripts": {
     "test": "grunt test",
     "start": "grunt serve",

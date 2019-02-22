@@ -31,6 +31,14 @@ module.exports = class extends Generator {
         }
       },
       {
+        name: "presentationDescription",
+        message: "A breif description of this presentation",
+        validate: function(input) {
+          if (input === "") return "Please enter breif description.";
+          return true;
+        }
+      },
+      {
         name: "packageVersion",
         message: "What version should we put in the package.json file?",
         default: this.config.get("packageVersion"),
