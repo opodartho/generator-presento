@@ -12,15 +12,13 @@ module.exports = class extends Generator {
     this.config.defaults({
       packageVersion: "0.0.0",
       deployToGithubPages: false,
-      revealTheme: 'black'
+      revealTheme: "black"
     });
   }
 
   prompting() {
     // Have Yeoman greet the user.
-    this.log(
-      yosay(`Welcome to the best ${chalk.red("Reveal.js")} generator!`)
-    );
+    this.log(yosay(`Welcome to the best ${chalk.red("Reveal.js")} generator!`));
 
     const prompts = [
       {
@@ -51,25 +49,25 @@ module.exports = class extends Generator {
         default: this.config.get("revealTheme")
       },
       {
-        name: 'deployToGithubPages',
-        message: 'Do you want to deploy you presentation to Github Pages? This requires an empty Github repository.',
-        type: 'confirm',
-        default: this.config.get('deployToGithubPages')
+        name: "deployToGithubPages",
+        message: `Do you want to deploy you presentation to Github Pages? This requires an empty Github repository.`,
+        type: "confirm",
+        default: this.config.get("deployToGithubPages")
       },
       {
-        name: 'githubUsername',
-        message: 'What is your Github username?',
-        default: this.config.get('githubUsername'),
+        name: "githubUsername",
+        message: "What is your Github username?",
+        default: this.config.get("githubUsername"),
         when: function(props) {
-          if(props.deployToGithubPages) return true;
+          if (props.deployToGithubPages) return true;
         }
       },
       {
-        name: 'githubRepository',
-        message: 'What is the Github repository name?',
-        default: this.config.get('githubRepository'),
+        name: "githubRepository",
+        message: "What is the Github repository name?",
+        default: this.config.get("githubRepository"),
         when: function(props) {
-          if(props.deployToGithubPages) return true;
+          if (props.deployToGithubPages) return true;
         }
       }
     ];

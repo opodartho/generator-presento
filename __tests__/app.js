@@ -11,6 +11,12 @@ describe("generator-presento:app", () => {
   });
 
   it("creates files", () => {
-    assert.file(["package.json"]);
+    assert.file([
+      "package.json",
+      "templates/_index.html",
+      "templates/_section.html",
+      "slides/slides.json",
+      "gruntfile.js"
+    ]);
   });
 });
