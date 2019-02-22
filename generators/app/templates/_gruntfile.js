@@ -32,7 +32,7 @@ module.exports = function(grunt) {
       themes: {
         expand: true,
         cwd: 'node_modules/reveal.js/css/theme/source',
-        src: ['*.sass', '*.scss'],
+        src: ['<%= config.get("revealTheme") %>.sass', '<%= config.get("revealTheme") %>.scss'],
         dest: 'build/css/theme',
         ext: '.css'
       }
@@ -123,7 +123,7 @@ module.exports = function(grunt) {
       },
       pages: {
         options: {
-          remote: '<%= pkg.repository.url %>',
+          remote: '<%%= pkg.repository.url %>',
           branch: 'gh-pages'
         }
       }

@@ -11,20 +11,22 @@ module.exports = class extends Generator {
     this.pkg = this.fs.readJSON(path.join(__dirname, "../package.json"));
     this.config.defaults({
       packageVersion: "0.0.0",
-      deployToGithubPages: false
+      deployToGithubPages: false,
+      revealTheme: 'black'
     });
   }
 
   prompting() {
     // Have Yeoman greet the user.
     this.log(
-      yosay(`Welcome to the best ${chalk.red("generator-presento")} generator!`)
+      yosay(`Welcome to the best ${chalk.red("Reveal.js")} generator!`)
     );
 
     const prompts = [
       {
         name: "presentationTitle",
         message: "What are you going to talk about?",
+        default: this.appname,
         validate: function(input) {
           if (input === "") return "Please enter presentation title.";
           return true;
@@ -40,6 +42,13 @@ module.exports = class extends Generator {
           }
           return true;
         }
+      },
+      {
+        name: "revealTheme",
+        type: "list",
+        message: "What Reveal.js theme would you like to use?",
+        choices: this.fs.readJSON(path.join(__dirname, "./themes.json")),
+        default: this.config.get("revealTheme")
       },
       {
         name: 'deployToGithubPages',
@@ -71,6 +80,7 @@ module.exports = class extends Generator {
       this.config.set("deployToGithubPages", props.deployToGithubPages);
       this.config.set("githubUsername", props.githubUsername);
       this.config.set("githubRepository", props.githubRepository);
+      this.config.set("revealTheme", props.revealTheme);
     });
   }
 
@@ -84,17 +94,19 @@ module.exports = class extends Generator {
       this.templatePath("__section.html"),
       this.destinationPath("templates/_section.html")
     );
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath("__index.html"),
-      this.destinationPath("templates/_index.html")
+      this.destinationPath("templates/_index.html"),
+      { config: this.config }
     );
     this.fs.copy(
       this.templatePath("_slides.json"),
       this.destinationPath("slides/slides.json")
     );
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath("_gruntfile.js"),
-      this.destinationPath("gruntfile.js")
+      this.destinationPath("gruntfile.js"),
+      { config: this.config }
     );
   }
 
