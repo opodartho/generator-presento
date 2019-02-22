@@ -114,6 +114,7 @@ module.exports = function(grunt) {
       }
     },
 
+    <% if (config.get('deployToGithubPages')) { %>
     buildcontrol: {
       options: {
         dir: 'build',
@@ -128,10 +129,10 @@ module.exports = function(grunt) {
         }
       }
     },
-
+    <% } %>
     watch: {
       js: {
-        files: [ 'Gruntfile.js'],
+        files: [ 'gruntfile.js'],
         tasks: 'js'
       },
       index: {
@@ -190,8 +191,10 @@ module.exports = function(grunt) {
   // Build presentation to deploy
   grunt.registerTask('build', [ 'default', 'buildIndex', 'clean', 'copy' ] );
 
+  <% if (config.get('deployToGithubPages')) { %>
   // Deploy to Github Pages
   grunt.registerTask('deploy', [ 'build', 'buildcontrol', 'clean' ] );
+  <% } %>
 
   // Serve presentation locally
   grunt.registerTask( 'serve', ['default', 'copy', 'buildIndex', 'connect', 'watch' ] );

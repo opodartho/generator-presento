@@ -5,8 +5,9 @@
   "scripts": {
     "test": "grunt test",
     "start": "grunt serve",
-    "build": "grunt build",
+    "build": "grunt build"<% if (config.get('deployToGithubPages')) {%>,
     "deploy": "grunt deploy"
+    <% }%>
   },
   "author": {
     "name": "Zahidul Haque",
