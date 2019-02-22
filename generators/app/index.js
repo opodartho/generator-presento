@@ -80,6 +80,22 @@ module.exports = class extends Generator {
       this.destinationPath("package.json"),
       { slugify: slugify, config: this.config }
     );
+    this.fs.copy(
+      this.templatePath("__section.html"),
+      this.destinationPath("templates/_section.html")
+    );
+    this.fs.copy(
+      this.templatePath("__index.html"),
+      this.destinationPath("templates/_index.html")
+    );
+    this.fs.copy(
+      this.templatePath("_slides.json"),
+      this.destinationPath("slides/slides.json")
+    );
+    this.fs.copy(
+      this.templatePath("_gruntfile.js"),
+      this.destinationPath("gruntfile.js")
+    );
   }
 
   install() {
