@@ -4,12 +4,10 @@ cache:
   directories:
   - node_modules
 node_js:
-- 4.0.0
 - v11
 - v10
 - v8
 - v6
-- v4
 - node
 before_install:
 - npm install -g codecov
