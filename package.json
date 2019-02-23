@@ -13,10 +13,17 @@
   ],
   "main": "generators/index.js",
   "keywords": [
+    "reveal",
     "Reveal.js",
     "Starter Kit",
     "Yeoman",
-    "yeoman-generator"
+    "yeoman-generator",
+    "nodejs",
+    "express",
+    "socket.io",
+    "github-pages",
+    "slides",
+    "presentation"
   ],
   "devDependencies": {
     "yeoman-test": "^1.7.0",
