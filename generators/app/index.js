@@ -11,8 +11,9 @@ module.exports = class extends Generator {
     this.pkg = this.fs.readJSON(path.join(__dirname, "../package.json"));
     this.config.defaults({
       packageVersion: "0.0.0",
-      deployToGithubPages: false,
-      revealTheme: "black"
+      revealTheme: "black",
+      deployToGithubPages: true,
+      githubRepository: slugify(this.appname)
     });
   }
 
@@ -32,11 +33,7 @@ module.exports = class extends Generator {
       },
       {
         name: "presentationDescription",
-        message: "A breif description of this presentation",
-        validate: function(input) {
-          if (input === "") return "Please enter breif description.";
-          return true;
-        }
+        message: "A breif description of this presentation"
       },
       {
         name: "packageVersion",
@@ -58,7 +55,7 @@ module.exports = class extends Generator {
       },
       {
         name: "deployToGithubPages",
-        message: `Do you want to deploy you presentation to Github Pages? This requires an empty Github repository.`,
+        message: "Will you be deploying to GitHub?",
         type: "confirm",
         default: this.config.get("deployToGithubPages")
       },
@@ -66,17 +63,31 @@ module.exports = class extends Generator {
         name: "githubUsername",
         message: "What is your Github username?",
         default: this.config.get("githubUsername"),
-        when: function(props) {
-          if (props.deployToGithubPages) return true;
+        when: props => {
+          return props.deployToGithubPages;
         }
       },
       {
         name: "githubRepository",
         message: "What is the Github repository name?",
         default: this.config.get("githubRepository"),
-        when: function(props) {
-          if (props.deployToGithubPages) return true;
+        when: props => {
+          return props.deployToGithubPages;
         }
+      },
+      {
+        type: "input",
+        name: "author",
+        message: "What is your name?",
+        default: this.config.get("author"),
+        store: true
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is your email address?",
+        default: this.config.get("email"),
+        store: true
       }
     ];
 
@@ -88,6 +99,8 @@ module.exports = class extends Generator {
       this.config.set("githubUsername", props.githubUsername);
       this.config.set("githubRepository", props.githubRepository);
       this.config.set("revealTheme", props.revealTheme);
+      this.config.set("author", props.author);
+      this.config.set("email", props.email);
     });
   }
 

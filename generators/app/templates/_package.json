@@ -10,8 +10,9 @@
     <% }%>
   },
   "author": {
-    "name": "Zahidul Haque",
-    "email": "iisowrovii@gmail.com"
+    "name": "<%= config.get('name')%>" <% if (config.get('email')) {%>,
+    "email": "<%= config.get('email')%>"
+    <% } %>
   }, <% if (config.get('deployToGithubPages')) { %>
   "repository": {
     "type": "git",
