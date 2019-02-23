@@ -9,17 +9,12 @@ node_js:
 - v8
 - v6
 - node
-before_install:
-- npm install -g codecov
 script:
 - npm run test
-after_success:
-- codecov
 deploy:
   provider: npm
   email: $EMAIL
-  api_key:
-    secure: $API_KEY
+  api_key: $API_KEY
   on:
     tags: true
     branch: master
