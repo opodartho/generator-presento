@@ -18,7 +18,9 @@ describe("generator-presento:app", () => {
       "templates/_section.html",
       "slides/slides.json",
       "slides/intro.md",
-      "gruntfile.js"
+      "gruntfile.js",
+      ".gitignore",
+      ".editorconfig"
     ]);
   });
 });

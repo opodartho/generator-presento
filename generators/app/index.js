@@ -63,6 +63,7 @@ module.exports = class extends Generator {
         name: "githubUsername",
         message: "What is your Github username?",
         default: this.config.get("githubUsername"),
+        store: true,
         when: props => {
           return props.deployToGithubPages;
         }
@@ -144,9 +145,30 @@ module.exports = class extends Generator {
       this.destinationPath("slides/intro.md"),
       { config: this.config }
     );
+    this.fs.copy(
+      this.templatePath("../../../.gitignore"),
+      this.destinationPath(".gitignore")
+    );
+    this.fs.copy(
+      this.templatePath("../../../.editorconfig"),
+      this.destinationPath(".editorconfig")
+    );
   }
 
   install() {
+    if (this.config.get("deployToGithubPages")) {
+      this.spawnCommandSync("git", ["init"]);
+      this.spawnCommandSync("git", [
+        "remote",
+        "add",
+        "origin",
+        "git@github.com:" +
+          this.config.get("githubUsername") +
+          "/" +
+          this.config.get("githubRepository") +
+          ".git"
+      ]);
+    }
     this.installDependencies({
       npm: true,
       bower: false
