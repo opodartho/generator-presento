@@ -92,6 +92,10 @@ module.exports = class extends Generator {
     ];
 
     return this.prompt(prompts).then(props => {
+      let website = "";
+      if (props.deployToGithubPages) {
+        website = "https://github.com/" + props.githubUsername;
+      }
       this.config.set("presentationTitle", props.presentationTitle);
       this.config.set("presentationDescription", props.presentationDescription);
       this.config.set("packageVersion", props.packageVersion);
@@ -101,6 +105,13 @@ module.exports = class extends Generator {
       this.config.set("revealTheme", props.revealTheme);
       this.config.set("author", props.author);
       this.config.set("email", props.email);
+      this.composeWith(require.resolve("generator-license"), {
+        name: props.author,
+        email: props.email,
+        website: website,
+        licensePrompt: "Which license do you want to use?",
+        defaultLicense: "MIT"
+      });
     });
   }
 
