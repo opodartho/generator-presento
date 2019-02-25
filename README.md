@@ -23,6 +23,13 @@ yo presento
  * Yeoman can be too opinionated at times but is easily convinced not to be.
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
 
+## Self-Promotion
+
+Like generator-presento?  Follow the repository on
+[GitHub](https://github.com/opodartho/generator-presento) And if
+you're feeling especially charitable, follow [opodartho](https://github.com/opodartho) on
+[GitHub](https://github.com/opodartho) and endrose on [Linkedin](https://www.linkedin.com/in/opodartho/).
+
 ## License
 
 MIT © [Zahidul Haque](https://github.com/opodartho)
