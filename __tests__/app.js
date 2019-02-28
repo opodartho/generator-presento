@@ -8,7 +8,8 @@ describe("generator-presento:app", () => {
     return helpers
       .run(path.join(__dirname, "../generators/app"))
       .withPrompts({ presentationTitle: "foo" })
-      .withPrompts({ presentationDescription: "bar" });
+      .withPrompts({ presentationDescription: "bar" })
+      .withPrompts({ dockerize: true });
   });
 
   it("creates files", () => {
@@ -20,7 +21,11 @@ describe("generator-presento:app", () => {
       "slides/intro.md",
       "gruntfile.js",
       ".gitignore",
-      ".editorconfig"
+      "nginx/default.conf",
+      "Dockerfile",
+      ".dockerignore",
+      ".editorconfig",
+      "LICENSE"
     ]);
   });
 });
