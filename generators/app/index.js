@@ -13,7 +13,8 @@ module.exports = class extends Generator {
       packageVersion: "0.0.0",
       revealTheme: "black",
       deployToGithubPages: true,
-      githubRepository: slugify(this.appname)
+      githubRepository: slugify(this.appname),
+      dockerize: false
     });
   }
 
@@ -77,18 +78,22 @@ module.exports = class extends Generator {
         }
       },
       {
-        type: "input",
         name: "author",
         message: "What is your name?",
         default: this.config.get("author"),
         store: true
       },
       {
-        type: "input",
         name: "email",
         message: "What is your email address?",
         default: this.config.get("email"),
         store: true
+      },
+      {
+        type: "confirm",
+        name: "dockerize",
+        message: "Do you want to create docker image?",
+        default: this.config.get("dockerize")
       }
     ];
 
@@ -106,6 +111,7 @@ module.exports = class extends Generator {
       this.config.set("revealTheme", props.revealTheme);
       this.config.set("author", props.author);
       this.config.set("email", props.email);
+      this.config.set("dockerize", props.dockerize);
       this.composeWith(require.resolve("generator-license"), {
         name: props.author,
         email: props.email,
@@ -117,23 +123,23 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copyTpl(
-      this.templatePath("_package.json"),
-      this.destinationPath("package.json"),
-      { slugify: slugify, config: this.config }
-    );
     this.fs.copy(
-      this.templatePath("__section.html"),
+      this.templatePath("templates/_section.html"),
       this.destinationPath("templates/_section.html")
     );
     this.fs.copyTpl(
-      this.templatePath("__index.html"),
+      this.templatePath("templates/_index.html"),
       this.destinationPath("templates/_index.html"),
       { config: this.config }
     );
     this.fs.copy(
-      this.templatePath("_slides.json"),
+      this.templatePath("slides/_slides.json"),
       this.destinationPath("slides/slides.json")
+    );
+    this.fs.copyTpl(
+      this.templatePath("slides/_intro.md"),
+      this.destinationPath("slides/intro.md"),
+      { config: this.config }
     );
     this.fs.copyTpl(
       this.templatePath("_gruntfile.js"),
@@ -141,9 +147,9 @@ module.exports = class extends Generator {
       { config: this.config }
     );
     this.fs.copyTpl(
-      this.templatePath("_intro.md"),
-      this.destinationPath("slides/intro.md"),
-      { config: this.config }
+      this.templatePath("_package.json"),
+      this.destinationPath("package.json"),
+      { slugify: slugify, config: this.config }
     );
     this.fs.copy(
       this.templatePath("../../../.gitignore"),
@@ -153,6 +159,20 @@ module.exports = class extends Generator {
       this.templatePath("../../../.editorconfig"),
       this.destinationPath(".editorconfig")
     );
+    if (this.config.get("dockerize")) {
+      this.fs.copy(
+        this.templatePath("nginx/_default.conf"),
+        this.destinationPath("nginx/default.conf")
+      );
+      this.fs.copy(
+        this.templatePath("_dockerfile"),
+        this.destinationPath("Dockerfile")
+      );
+      this.fs.copy(
+        this.templatePath("_dockerignore"),
+        this.destinationPath(".dockerignore")
+      );
+    }
   }
 
   install() {

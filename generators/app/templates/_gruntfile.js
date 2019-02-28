@@ -141,7 +141,7 @@ module.exports = function(grunt) {
           'templates/_section.html',
           'slides/*'
         ],
-        tasks: 'buildIndex'
+        tasks: 'build'
       },
       options: {
         livereload: true
@@ -189,7 +189,7 @@ module.exports = function(grunt) {
   grunt.registerTask( 'css', [ 'sass', 'autoprefixer', 'cssmin' ] );
 
   // Build presentation to deploy
-  grunt.registerTask('build', [ 'default', 'buildIndex', 'clean', 'copy' ] );
+  grunt.registerTask('build', [ 'default', 'buildIndex', 'copy' ] );
 
   <% if (config.get('deployToGithubPages')) { %>
   // Deploy to Github Pages
@@ -197,7 +197,7 @@ module.exports = function(grunt) {
   <% } %>
 
   // Serve presentation locally
-  grunt.registerTask( 'serve', ['default', 'copy', 'buildIndex', 'connect', 'watch' ] );
+  grunt.registerTask( 'serve', ['build', 'connect', 'watch' ] );
 
   // Run tests
   grunt.registerTask( 'test', [ 'jshint' ] );
