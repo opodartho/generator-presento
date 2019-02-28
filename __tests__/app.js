@@ -9,6 +9,7 @@ describe("generator-presento:app", () => {
       .run(path.join(__dirname, "../generators/app"))
       .withPrompts({ presentationTitle: "foo" })
       .withPrompts({ presentationDescription: "bar" })
+      .withPrompts({ license: "Apache-2.0" })
       .withPrompts({ dockerize: true });
   });
 
@@ -25,6 +26,7 @@ describe("generator-presento:app", () => {
       "Dockerfile",
       ".dockerignore",
       ".editorconfig",
+      "README.md",
       "LICENSE"
     ]);
   });

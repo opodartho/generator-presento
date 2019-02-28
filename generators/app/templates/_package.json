@@ -42,7 +42,6 @@
     "node-sass": "^4.11.0",
     "socket.io": "^2.2.0"
   },
-  "license": "MIT",
   "dependencies": {
     "reveal.js": "^3.7.0"
   }

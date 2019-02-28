@@ -98,10 +98,6 @@ module.exports = class extends Generator {
     ];
 
     return this.prompt(prompts).then(props => {
-      let website = "";
-      if (props.deployToGithubPages) {
-        website = "https://github.com/" + props.githubUsername;
-      }
       this.config.set("presentationTitle", props.presentationTitle);
       this.config.set("presentationDescription", props.presentationDescription);
       this.config.set("packageVersion", props.packageVersion);
@@ -112,13 +108,21 @@ module.exports = class extends Generator {
       this.config.set("author", props.author);
       this.config.set("email", props.email);
       this.config.set("dockerize", props.dockerize);
-      this.composeWith(require.resolve("generator-license"), {
-        name: props.author,
-        email: props.email,
-        website: website,
-        licensePrompt: "Which license do you want to use?",
-        defaultLicense: "MIT"
-      });
+    });
+  }
+
+  default() {
+    let website = "";
+    if (this.config.deployToGithubPages) {
+      website = "https://github.com/" + this.get("githubUsername");
+    }
+    this.composeWith(require.resolve("generator-license"), {
+      name: this.config.get("author"),
+      email: this.config.get("email"),
+      website: website,
+      licensePrompt: "Which license do you want to use?",
+      defaultLicense: "MIT",
+      publish: true
     });
   }
 
@@ -159,6 +163,7 @@ module.exports = class extends Generator {
       this.templatePath("../../../.editorconfig"),
       this.destinationPath(".editorconfig")
     );
+
     if (this.config.get("dockerize")) {
       this.fs.copy(
         this.templatePath("nginx/_default.conf"),
@@ -176,6 +181,14 @@ module.exports = class extends Generator {
   }
 
   install() {
+    // TODO: Need to find a way to create readme after license generator execute.
+    const pkg = this.fs.readJSON(this.destinationPath("package.json"), {});
+    this.fs.copyTpl(
+      this.templatePath("_README.md"),
+      this.destinationPath("README.md"),
+      { config: this.config, license: pkg.license }
+    );
+
     if (this.config.get("deployToGithubPages")) {
       this.spawnCommandSync("git", ["init"]);
       this.spawnCommandSync("git", [
