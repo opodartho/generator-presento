@@ -152,7 +152,7 @@ module.exports = class extends Generator {
       { slugify: slugify, config: this.config }
     );
     this.fs.copy(
-      this.templatePath("../../../.gitignore"),
+      this.templatePath("_gitignore"),
       this.destinationPath(".gitignore")
     );
     this.fs.copy(
