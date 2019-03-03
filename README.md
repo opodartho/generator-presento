@@ -1,6 +1,15 @@
 # generator-presento [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > RevealJS Starter Kit
 
+## Technologies used
+- [RevealJS](https://github.com/hakimel/reveal.js)
+- [npm](https://github.com/npm/cli)
+- [Grunt](https://gruntjs.com)
+- [Yeoman](https://yeoman.io)
+- [yeoman-generator](https://github.com/yeoman/generator-generator)
+- [express](https://expressjs.com)
+- [github](https://github.com)
+
 ## Installation
 
 First, install [Yeoman](http://yeoman.io) and generator-presento using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
@@ -13,6 +22,7 @@ npm install -g generator-presento
 Then generate your new project:
 
 ```bash
+mkdir presentation-name && cd $_
 yo presento
 ```
 
